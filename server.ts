@@ -7,6 +7,9 @@ import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import { createClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
+import cors from 'cors';
+import helmet from 'helmet';
+import { z } from 'zod';
 
 dotenv.config();
 
@@ -16,6 +19,16 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3005;
 const JWT_SECRET = process.env.JWT_SECRET || 'northside-smoke-default-secret';
+
+// Security Middleware
+app.use(helmet());
+app.use(cors({
+  origin: process.env.ALLOWED_ORIGINS?.split(',') || [],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}));
+app.use(express.json());
 
 // Initialize Supabase Client
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
@@ -100,7 +113,6 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
 });
 
 // Middleware for normal JSON APIs
-app.use(express.json());
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // JWT Token Authenticator
@@ -180,13 +192,31 @@ const mockDb = {
   }
 };
 
+// Zod Schemas
+const registerSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
+
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
+
+// Error handler utility
+const handleError = (res: express.Response, err: any) => {
+  console.error(err);
+  res.status(500).json({ error: 'Internal server error' });
+};
+
 // ── 1. SAAS AUTHENTICATION PORTS ──
 app.post('/api/auth/register', apiLimiter, async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) return res.status(400).json({ error: 'Email and password required' });
+  try {
+    const validation = registerSchema.safeParse(req.body);
+    if (!validation.success) return res.status(400).json({ error: validation.error.errors[0].message });
+    const { email, password } = validation.data;
 
-  if (isSupabaseActive && supabase) {
-    try {
+    if (isSupabaseActive && supabase) {
       const { data, error } = await supabase.auth.signUp({ email, password });
       if (error) throw error;
       
@@ -195,23 +225,24 @@ app.post('/api/auth/register', apiLimiter, async (req, res) => {
 
       const token = jwt.sign({ id: user.id, email: user.email, subscription_tier: 'Boutique' }, JWT_SECRET);
       return res.json({ success: true, token, user: { id: user.id, email: user.email, subscription_tier: 'Boutique' } });
-    } catch (err: any) {
-      return res.status(400).json({ error: err.message });
     }
-  }
 
-  // Sandbox Mode Fallback
-  const mockId = `user-${Date.now()}`;
-  const token = jwt.sign({ id: mockId, email, subscription_tier: 'Boutique' }, JWT_SECRET);
-  res.json({ success: true, token, user: { id: mockId, email, subscription_tier: 'Boutique' } });
+    // Sandbox Mode Fallback
+    const mockId = `user-${Date.now()}`;
+    const token = jwt.sign({ id: mockId, email, subscription_tier: 'Boutique' }, JWT_SECRET);
+    res.json({ success: true, token, user: { id: mockId, email, subscription_tier: 'Boutique' } });
+  } catch (err: any) {
+    handleError(res, err);
+  }
 });
 
 app.post('/api/auth/login', apiLimiter, async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) return res.status(400).json({ error: 'Email and password required' });
+  try {
+    const validation = loginSchema.safeParse(req.body);
+    if (!validation.success) return res.status(400).json({ error: validation.error.errors[0].message });
+    const { email, password } = validation.data;
 
-  if (isSupabaseActive && supabase) {
-    try {
+    if (isSupabaseActive && supabase) {
       const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) throw error;
 
@@ -228,15 +259,15 @@ app.post('/api/auth/login', apiLimiter, async (req, res) => {
       const token = jwt.sign({ id: user.id, email: user.email, subscription_tier: tier }, JWT_SECRET);
 
       return res.json({ success: true, token, user: { id: user.id, email: user.email, subscription_tier: tier } });
-    } catch (err: any) {
-      return res.status(400).json({ error: err.message });
     }
-  }
 
-  // Sandbox Mode Fallback
-  const mockId = '00000000-0000-0000-0000-000000000000';
-  const token = jwt.sign({ id: mockId, email, subscription_tier: 'Boutique' }, JWT_SECRET);
-  res.json({ success: true, token, user: { id: mockId, email, subscription_tier: 'Boutique' } });
+    // Sandbox Mode Fallback
+    const mockId = '00000000-0000-0000-0000-000000000000';
+    const token = jwt.sign({ id: mockId, email, subscription_tier: 'Boutique' }, JWT_SECRET);
+    res.json({ success: true, token, user: { id: mockId, email, subscription_tier: 'Boutique' } });
+  } catch (err: any) {
+    handleError(res, err);
+  }
 });
 
 // ── 2. STRIPE CHECKOUT ROUTING ──
@@ -740,6 +771,12 @@ app.post('/api/openhub/redeploy', apiLimiter, authenticateToken, async (req, res
 // SPA catchall fallback
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+// Generic error handler
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Internal server error' });
 });
 
 app.listen(PORT, () => {
