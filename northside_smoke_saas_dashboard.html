@@ -1,0 +1,1142 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --gold-dark: #8B6914;
+    --smoke: #2A2A2A;
+    --smoke-mid: #1A1A1A;
+    --smoke-deep: #111111;
+    --leaf: #3D6B4A;
+    --leaf-light: #5A9B6A;
+    --leaf-pale: #D4EAD8;
+    --cream: #F5F0E8;
+    --muted: rgba(255,255,255,0.45);
+    --border: rgba(201,169,110,0.2);
+    --border-strong: rgba(201,169,110,0.45);
+  }
+
+  .ns-wrap {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--smoke-deep);
+    color: #E8E0D4;
+    min-height: 100vh;
+    width: 100%;
+  }
+
+  /* ── HEADER ── */
+  .ns-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 28px;
+    border-bottom: 0.5px solid var(--border);
+    background: var(--smoke-mid);
+  }
+
+  .ns-logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .ns-logo-img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border-strong);
+  }
+
+  .ns-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .ns-brand-sub {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-top: 1px;
+  }
+
+  .ns-nav {
+    display: flex;
+    gap: 4px;
+  }
+
+  .ns-nav-btn {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-transform: uppercase;
+  }
+
+  .ns-nav-btn:hover, .ns-nav-btn.active {
+    background: rgba(201,169,110,0.1);
+    color: var(--gold);
+  }
+
+  .ns-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ns-badge {
+    background: rgba(61,107,74,0.25);
+    border: 0.5px solid var(--leaf);
+    color: #8FC99A;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .ns-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--leaf), var(--gold-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 500; color: #fff;
+    border: 1px solid var(--border-strong);
+    cursor: pointer;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .ns-body {
+    display: flex;
+    min-height: calc(100vh - 61px);
+  }
+
+  /* ── SIDEBAR ── */
+  .ns-sidebar {
+    width: 200px;
+    flex-shrink: 0;
+    border-right: 0.5px solid var(--border);
+    padding: 20px 12px;
+    background: rgba(26,26,26,0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .ns-sidebar-section {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: rgba(201,169,110,0.5);
+    text-transform: uppercase;
+    padding: 14px 10px 6px;
+  }
+
+  .ns-sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--muted);
+    transition: all 0.15s;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .ns-sidebar-item:hover { background: rgba(201,169,110,0.07); color: #E8E0D4; }
+  .ns-sidebar-item.active { background: rgba(201,169,110,0.12); color: var(--gold); }
+  .ns-sidebar-item .ti { font-size: 15px; }
+
+  .ns-sidebar-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--leaf-light); margin-left: auto; flex-shrink: 0;
+  }
+  .ns-sidebar-dot.warn { background: #E09550; }
+  .ns-sidebar-dot.alert { background: #C46B6B; }
+
+  /* ── CONTENT ── */
+  .ns-content {
+    flex: 1;
+    padding: 24px 28px;
+    overflow-y: auto;
+    display: none;
+  }
+  .ns-content.visible { display: block; }
+
+  /* ── PAGE TITLE ── */
+  .ns-page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .ns-page-sub {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 24px;
+  }
+
+  /* ── METRIC GRID ── */
+  .ns-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .ns-metric {
+    background: rgba(255,255,255,0.03);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ns-metric::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+
+  .ns-metric.green::before { background: var(--leaf-light); }
+  .ns-metric.warn::before { background: #E09550; }
+  .ns-metric.red::before { background: #C46B6B; }
+
+  .ns-metric-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .ns-metric-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #F0E8D8;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .ns-metric-delta {
+    font-size: 11px;
+    color: #8FC99A;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .ns-metric-delta.down { color: #C46B6B; }
+
+  /* ── GRID 2-COL ── */
+  .ns-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .ns-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  /* ── CARD ── */
+  .ns-card {
+    background: rgba(255,255,255,0.03);
+    border: 0.5px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+
+  .ns-card-title {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ns-card-title-action {
+    font-size: 10px;
+    color: var(--muted);
+    cursor: pointer;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .ns-card-title-action:hover { color: var(--gold); }
+
+  /* ── TABLE ── */
+  .ns-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .ns-table th {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(201,169,110,0.5);
+    padding: 4px 8px 8px;
+    text-align: left;
+    border-bottom: 0.5px solid var(--border);
+    font-weight: 400;
+  }
+  .ns-table td {
+    padding: 9px 8px;
+    border-bottom: 0.5px solid rgba(255,255,255,0.04);
+    color: rgba(232,224,212,0.85);
+    vertical-align: middle;
+  }
+  .ns-table tr:last-child td { border-bottom: none; }
+  .ns-table tr:hover td { background: rgba(201,169,110,0.04); }
+
+  /* ── STATUS PILLS ── */
+  .ns-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    letter-spacing: 0.06em;
+    font-weight: 400;
+  }
+  .ns-pill.green { background: rgba(61,107,74,0.25); color: #8FC99A; border: 0.5px solid rgba(90,155,106,0.35); }
+  .ns-pill.gold { background: rgba(201,169,110,0.15); color: var(--gold); border: 0.5px solid var(--border-strong); }
+  .ns-pill.warn { background: rgba(224,149,80,0.15); color: #E09550; border: 0.5px solid rgba(224,149,80,0.35); }
+  .ns-pill.red { background: rgba(196,107,107,0.15); color: #D48080; border: 0.5px solid rgba(196,107,107,0.35); }
+  .ns-pill.blue { background: rgba(55,100,180,0.15); color: #7AA8E8; border: 0.5px solid rgba(55,100,180,0.35); }
+
+  /* ── BAR CHART ── */
+  .ns-bar-chart { display: flex; align-items: flex-end; gap: 6px; height: 80px; margin-top: 6px; }
+  .ns-bar {
+    flex: 1;
+    background: rgba(201,169,110,0.25);
+    border-radius: 3px 3px 0 0;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.15s;
+    min-height: 4px;
+  }
+  .ns-bar:hover { background: rgba(201,169,110,0.5); }
+  .ns-bar.green { background: rgba(61,107,74,0.35); }
+  .ns-bar.green:hover { background: rgba(90,155,106,0.55); }
+  .ns-bar-label { font-size: 9px; color: var(--muted); text-align: center; margin-top: 5px; }
+
+  /* ── AGENT STATUS ── */
+  .ns-agent-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 0.5px solid rgba(255,255,255,0.04);
+  }
+  .ns-agent-row:last-child { border-bottom: none; }
+
+  .ns-agent-dot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+  }
+  .ns-agent-dot.active { background: #8FC99A; box-shadow: 0 0 6px rgba(143,201,154,0.6); }
+  .ns-agent-dot.idle { background: #E09550; }
+  .ns-agent-dot.offline { background: #555; }
+
+  .ns-agent-name { font-size: 12px; flex: 1; color: rgba(232,224,212,0.9); }
+  .ns-agent-task { font-size: 11px; color: var(--muted); flex: 2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ns-agent-time { font-size: 10px; color: rgba(201,169,110,0.6); flex-shrink: 0; }
+
+  /* ── PROGRESS BAR ── */
+  .ns-progress-wrap { background: rgba(255,255,255,0.06); border-radius: 3px; height: 4px; margin-top: 5px; }
+  .ns-progress-fill { height: 4px; border-radius: 3px; background: var(--gold); }
+  .ns-progress-fill.green { background: var(--leaf-light); }
+
+  /* ── INFLUENCER ROW ── */
+  .ns-inf-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 0.5px solid rgba(255,255,255,0.04);
+  }
+  .ns-inf-row:last-child { border-bottom: none; }
+
+  .ns-inf-avatar {
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 500; flex-shrink: 0;
+    border: 0.5px solid var(--border-strong);
+  }
+
+  /* ── COMPLIANCE TIMELINE ── */
+  .ns-timeline { display: flex; flex-direction: column; gap: 0; }
+  .ns-tl-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 0.5px solid rgba(255,255,255,0.04);
+  }
+  .ns-tl-item:last-child { border-bottom: none; }
+  .ns-tl-dot-col { display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .ns-tl-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
+  .ns-tl-line { width: 1px; flex: 1; background: var(--border); margin-top: 4px; }
+  .ns-tl-date { font-size: 10px; color: var(--muted); margin-bottom: 2px; }
+  .ns-tl-text { font-size: 12px; color: rgba(232,224,212,0.85); }
+
+  /* ── HEATMAP MINI ── */
+  .ns-heat { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-top: 8px; }
+  .ns-heat-cell { height: 16px; border-radius: 2px; background: rgba(61,107,74,0.1); }
+  .ns-heat-cell.l1 { background: rgba(61,107,74,0.25); }
+  .ns-heat-cell.l2 { background: rgba(61,107,74,0.45); }
+  .ns-heat-cell.l3 { background: rgba(90,155,106,0.65); }
+  .ns-heat-cell.l4 { background: rgba(143,201,154,0.85); }
+
+  /* ── CALL CENTER ── */
+  .ns-call-metric {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 0;
+    border-bottom: 0.5px solid rgba(255,255,255,0.05);
+    font-size: 12px;
+  }
+  .ns-call-metric:last-child { border-bottom: none; }
+  .ns-call-label { color: var(--muted); }
+  .ns-call-value { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: #F0E8D8; }
+
+  /* ── DONUT CHART SVG ── */
+  .ns-donut { display: flex; align-items: center; gap: 16px; }
+  .ns-donut-legend { display: flex; flex-direction: column; gap: 7px; }
+  .ns-donut-legend-item { display: flex; align-items: center; gap: 7px; font-size: 11px; color: rgba(232,224,212,0.75); }
+  .ns-donut-legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+  /* ── AUDIT PANEL ── */
+  .ns-audit { background: rgba(201,169,110,0.04); border: 0.5px solid var(--border-strong); border-radius: 10px; padding: 18px 20px; margin-top: 24px; }
+  .ns-audit-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .ns-audit-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ns-audit-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .ns-audit-item {
+    background: rgba(255,255,255,0.03);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .ns-audit-item-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+  .ns-audit-item-val { font-size: 18px; font-family: 'Cormorant Garamond', serif; color: #F0E8D8; }
+  .ns-audit-item-val.pass { color: #8FC99A; }
+  .ns-audit-item-val.warn { color: #E09550; }
+  .ns-audit-item-val.fail { color: #C46B6B; }
+
+  .ns-finding {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 0.5px solid rgba(255,255,255,0.04);
+    font-size: 12px;
+  }
+  .ns-finding:last-child { border-bottom: none; }
+  .ns-finding-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .ns-finding-text { color: rgba(232,224,212,0.8); flex: 1; }
+  .ns-finding-sev { font-size: 10px; flex-shrink: 0; padding: 2px 7px; border-radius: 20px; }
+  .ns-finding-sev.info { background: rgba(55,100,180,0.2); color: #7AA8E8; }
+  .ns-finding-sev.warn { background: rgba(224,149,80,0.2); color: #E09550; }
+  .ns-finding-sev.pass { background: rgba(61,107,74,0.2); color: #8FC99A; }
+
+  /* Tab scroll hiding */
+  .ns-tabs { display: flex; gap: 2px; margin-bottom: 20px; border-bottom: 0.5px solid var(--border); }
+  .ns-tab {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    padding: 8px 14px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -0.5px;
+    letter-spacing: 0.05em;
+    transition: all 0.15s;
+  }
+  .ns-tab:hover { color: #E8E0D4; }
+  .ns-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+</style>
+
+<div class="ns-wrap">
+  <h2 class="sr-only" style="position:absolute;left:-9999px;">Northside Smoke — Operations Dashboard</h2>
+
+  <!-- HEADER -->
+  <header class="ns-header">
+    <div class="ns-logo-area">
+      <img class="ns-logo-img" src="/mnt/user-data/uploads/Gemini_Generated_Image_c2bcurc2bcurc2bc.png" alt="Northside Smoke logo" onerror="this.style.display='none'; document.getElementById('ns-logo-fallback').style.display='flex';" />
+      <div id="ns-logo-fallback" style="display:none;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#3D6B4A,#8B6914);border:1px solid rgba(201,169,110,0.45);align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:14px;color:#C9A96E;font-weight:600;">NS</div>
+      <div>
+        <div class="ns-brand">Northside Smoke</div>
+        <div class="ns-brand-sub">Operations Platform</div>
+      </div>
+    </div>
+    <nav class="ns-nav">
+      <button class="ns-nav-btn active" onclick="showPage('overview')">Overview</button>
+      <button class="ns-nav-btn" onclick="showPage('ecommerce')">E-Commerce</button>
+      <button class="ns-nav-btn" onclick="showPage('workforce')">Workforce</button>
+      <button class="ns-nav-btn" onclick="showPage('callcenter')">Call Center</button>
+      <button class="ns-nav-btn" onclick="showPage('influencer')">Influencers</button>
+      <button class="ns-nav-btn" onclick="showPage('compliance')">Compliance</button>
+    </nav>
+    <div class="ns-header-right">
+      <span class="ns-badge">● Live</span>
+      <div class="ns-avatar" title="Terrence">T</div>
+    </div>
+  </header>
+
+  <div class="ns-body">
+    <!-- SIDEBAR -->
+    <aside class="ns-sidebar">
+      <div class="ns-sidebar-section">Operations</div>
+      <button class="ns-sidebar-item active" onclick="showPage('overview')"><i class="ti ti-layout-dashboard" aria-hidden="true"></i> Dashboard</button>
+      <button class="ns-sidebar-item" onclick="showPage('ecommerce')"><i class="ti ti-shopping-bag" aria-hidden="true"></i> Orders <span class="ns-sidebar-dot"></span></button>
+      <button class="ns-sidebar-item" onclick="showPage('workforce')"><i class="ti ti-users" aria-hidden="true"></i> Workforce</button>
+
+      <div class="ns-sidebar-section">Revenue</div>
+      <button class="ns-sidebar-item" onclick="showPage('callcenter')"><i class="ti ti-phone" aria-hidden="true"></i> Call Center <span class="ns-sidebar-dot warn"></span></button>
+      <button class="ns-sidebar-item" onclick="showPage('influencer')"><i class="ti ti-speakerphone" aria-hidden="true"></i> Influencers</button>
+
+      <div class="ns-sidebar-section">Compliance</div>
+      <button class="ns-sidebar-item" onclick="showPage('compliance')"><i class="ti ti-shield-check" aria-hidden="true"></i> COA Tracker <span class="ns-sidebar-dot alert"></span></button>
+      <button class="ns-sidebar-item"><i class="ti ti-file-text" aria-hidden="true"></i> Docs Vault</button>
+
+      <div class="ns-sidebar-section">Integrations</div>
+      <button class="ns-sidebar-item"><i class="ti ti-brand-shopify" aria-hidden="true"></i> Shopify</button>
+      <button class="ns-sidebar-item"><i class="ti ti-credit-card" aria-hidden="true"></i> Payments</button>
+      <button class="ns-sidebar-item"><i class="ti ti-settings" aria-hidden="true"></i> Settings</button>
+    </aside>
+
+    <!-- ═══════════════ OVERVIEW PAGE ═══════════════ -->
+    <main id="page-overview" class="ns-content visible">
+      <div class="ns-page-title">Command Center</div>
+      <div class="ns-page-sub">Wednesday, May 20, 2026 · All systems operational</div>
+
+      <div class="ns-metrics">
+        <div class="ns-metric green">
+          <div class="ns-metric-label">Today's Revenue</div>
+          <div class="ns-metric-value">$4,280</div>
+          <div class="ns-metric-delta"><i class="ti ti-trending-up" aria-hidden="true"></i> +18% vs yesterday</div>
+        </div>
+        <div class="ns-metric">
+          <div class="ns-metric-label">Pending Orders</div>
+          <div class="ns-metric-value">34</div>
+          <div class="ns-metric-delta"><i class="ti ti-clock" aria-hidden="true"></i> Avg 2.1h fulfill</div>
+        </div>
+        <div class="ns-metric warn">
+          <div class="ns-metric-label">Call Center Leads</div>
+          <div class="ns-metric-value">12</div>
+          <div class="ns-metric-delta down"><i class="ti ti-trending-down" aria-hidden="true"></i> 3 uncontacted</div>
+        </div>
+        <div class="ns-metric">
+          <div class="ns-metric-label">Active Agents</div>
+          <div class="ns-metric-value">6/8</div>
+          <div class="ns-metric-delta"><i class="ti ti-robot" aria-hidden="true"></i> 2 idle, 0 down</div>
+        </div>
+      </div>
+
+      <div class="ns-grid-2">
+        <!-- REVENUE CHART -->
+        <div class="ns-card">
+          <div class="ns-card-title">Weekly Revenue <span class="ns-card-title-action">View full →</span></div>
+          <div style="display:flex;gap:6px;height:90px;align-items:flex-end;">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div class="ns-bar green" style="height:45%;width:100%;"></div>
+              <div class="ns-bar-label">Mon</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div class="ns-bar green" style="height:62%;width:100%;"></div>
+              <div class="ns-bar-label">Tue</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div class="ns-bar green" style="height:38%;width:100%;"></div>
+              <div class="ns-bar-label">Wed</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div class="ns-bar green" style="height:80%;width:100%;"></div>
+              <div class="ns-bar-label">Thu</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div class="ns-bar" style="height:91%;width:100%;background:rgba(201,169,110,0.4);"></div>
+              <div class="ns-bar-label" style="color:var(--gold);">Fri</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div class="ns-bar green" style="height:55%;width:100%;"></div>
+              <div class="ns-bar-label">Sat</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div class="ns-bar green" style="height:30%;width:100%;"></div>
+              <div class="ns-bar-label">Sun</div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:12px;padding-top:10px;border-top:0.5px solid var(--border);font-size:11px;color:var(--muted);">
+            <span>Week total: <span style="color:#F0E8D8;">$26,840</span></span>
+            <span>Goal: <span style="color:var(--gold);">$30k</span></span>
+          </div>
+        </div>
+
+        <!-- AGENTIC WORKFORCE -->
+        <div class="ns-card">
+          <div class="ns-card-title">Agentic Workforce <span class="ns-card-title-action" onclick="showPage('workforce')">Manage →</span></div>
+          <div class="ns-agent-row">
+            <div class="ns-agent-dot active"></div>
+            <div class="ns-agent-name">Shopify Agent</div>
+            <div class="ns-agent-task">Processing 4 pending orders</div>
+            <div class="ns-agent-time">Active</div>
+          </div>
+          <div class="ns-agent-row">
+            <div class="ns-agent-dot active"></div>
+            <div class="ns-agent-name">SEO Agent</div>
+            <div class="ns-agent-task">Updating 12 product descriptions</div>
+            <div class="ns-agent-time">Active</div>
+          </div>
+          <div class="ns-agent-row">
+            <div class="ns-agent-dot active"></div>
+            <div class="ns-agent-name">Email Agent</div>
+            <div class="ns-agent-task">Sending 5 order confirmations</div>
+            <div class="ns-agent-time">Active</div>
+          </div>
+          <div class="ns-agent-row">
+            <div class="ns-agent-dot idle"></div>
+            <div class="ns-agent-name">Review Agent</div>
+            <div class="ns-agent-task">Awaiting new reviews</div>
+            <div class="ns-agent-time">Idle</div>
+          </div>
+          <div class="ns-agent-row">
+            <div class="ns-agent-dot active"></div>
+            <div class="ns-agent-name">COA Validator</div>
+            <div class="ns-agent-task">Checking 3 supplier certs</div>
+            <div class="ns-agent-time">Active</div>
+          </div>
+          <div class="ns-agent-row">
+            <div class="ns-agent-dot idle"></div>
+            <div class="ns-agent-name">Pricing Agent</div>
+            <div class="ns-agent-task">Monitoring competitor prices</div>
+            <div class="ns-agent-time">Idle</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ns-grid-3">
+        <!-- TOP PRODUCTS -->
+        <div class="ns-card">
+          <div class="ns-card-title">Top Products</div>
+          <table class="ns-table">
+            <thead><tr><th>Product</th><th>Units</th><th>Rev</th></tr></thead>
+            <tbody>
+              <tr><td>Indica Flower 3.5g</td><td>48</td><td style="color:var(--gold)">$1,440</td></tr>
+              <tr><td>Sativa Flower 7g</td><td>31</td><td style="color:var(--gold)">$1,240</td></tr>
+              <tr><td>Pre-Roll 5pk</td><td>27</td><td style="color:var(--gold)">$675</td></tr>
+              <tr><td>Delta-8 Gummies</td><td>19</td><td style="color:var(--gold)">$570</td></tr>
+              <tr><td>Concentrate 1g</td><td>14</td><td style="color:var(--gold)">$490</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CALL CENTER SUMMARY -->
+        <div class="ns-card">
+          <div class="ns-card-title">Call Center <span class="ns-card-title-action" onclick="showPage('callcenter')">Details →</span></div>
+          <div class="ns-call-metric"><span class="ns-call-label">Calls today</span><span class="ns-call-value">23</span></div>
+          <div class="ns-call-metric"><span class="ns-call-label">Conversion rate</span><span class="ns-call-value" style="color:#8FC99A;">34%</span></div>
+          <div class="ns-call-metric"><span class="ns-call-label">Avg handle time</span><span class="ns-call-value">4m 12s</span></div>
+          <div class="ns-call-metric"><span class="ns-call-label">Uncontacted leads</span><span class="ns-call-value" style="color:#E09550;">3</span></div>
+          <div class="ns-call-metric"><span class="ns-call-label">Revenue attributed</span><span class="ns-call-value" style="color:var(--gold);">$820</span></div>
+        </div>
+
+        <!-- COMPLIANCE ALERTS -->
+        <div class="ns-card">
+          <div class="ns-card-title">Compliance Alerts <span class="ns-card-title-action" onclick="showPage('compliance')">View →</span></div>
+          <div class="ns-finding">
+            <i class="ti ti-alert-triangle ns-finding-icon" style="color:#E09550;" aria-hidden="true"></i>
+            <div class="ns-finding-text">2 COAs expiring in 14 days</div>
+            <span class="ns-finding-sev warn">Warn</span>
+          </div>
+          <div class="ns-finding">
+            <i class="ti ti-x ns-finding-icon" style="color:#C46B6B;" aria-hidden="true"></i>
+            <div class="ns-finding-text">NC THCA reg update pending review</div>
+            <span class="ns-finding-sev warn">Action</span>
+          </div>
+          <div class="ns-finding">
+            <i class="ti ti-check ns-finding-icon" style="color:#8FC99A;" aria-hidden="true"></i>
+            <div class="ns-finding-text">All active SKUs have valid COAs</div>
+            <span class="ns-finding-sev pass">Clear</span>
+          </div>
+          <div class="ns-finding">
+            <i class="ti ti-info-circle ns-finding-icon" style="color:#7AA8E8;" aria-hidden="true"></i>
+            <div class="ns-finding-text">Supplier cert renewal — Apex Hemp</div>
+            <span class="ns-finding-sev info">Info</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AUDIT PANEL -->
+      <div class="ns-audit">
+        <div class="ns-audit-header">
+          <div class="ns-audit-title"><i class="ti ti-shield" aria-hidden="true"></i> System Audit — May 20, 2026</div>
+          <span class="ns-pill gold">Last run: 6 min ago</span>
+        </div>
+        <div class="ns-audit-grid">
+          <div class="ns-audit-item">
+            <div class="ns-audit-item-label">Overall Health</div>
+            <div class="ns-audit-item-val pass">94/100</div>
+            <div class="ns-progress-wrap"><div class="ns-progress-fill green" style="width:94%;"></div></div>
+          </div>
+          <div class="ns-audit-item">
+            <div class="ns-audit-item-label">Open Findings</div>
+            <div class="ns-audit-item-val warn">4</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px;">2 warn · 2 info</div>
+          </div>
+          <div class="ns-audit-item">
+            <div class="ns-audit-item-label">Integrations Online</div>
+            <div class="ns-audit-item-val pass">5/5</div>
+            <div style="font-size:10px;color:#8FC99A;margin-top:3px;">Shopify · Stripe · USPS · SMS · Email</div>
+          </div>
+        </div>
+        <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(201,169,110,0.5);margin-bottom:8px;">Recent Findings</div>
+        <div class="ns-finding">
+          <i class="ti ti-alert-triangle ns-finding-icon" style="color:#E09550;" aria-hidden="true"></i>
+          <div class="ns-finding-text">2 products have COAs expiring within 14 days — renew before listing refresh</div>
+          <span class="ns-finding-sev warn">Warning</span>
+        </div>
+        <div class="ns-finding">
+          <i class="ti ti-alert-triangle ns-finding-icon" style="color:#E09550;" aria-hidden="true"></i>
+          <div class="ns-finding-text">Call center queue has 3 uncontacted leads older than 2 hours</div>
+          <span class="ns-finding-sev warn">Warning</span>
+        </div>
+        <div class="ns-finding">
+          <i class="ti ti-info-circle ns-finding-icon" style="color:#7AA8E8;" aria-hidden="true"></i>
+          <div class="ns-finding-text">Pricing Agent last benchmarked competitors 18h ago — schedule refresh</div>
+          <span class="ns-finding-sev info">Info</span>
+        </div>
+        <div class="ns-finding">
+          <i class="ti ti-info-circle ns-finding-icon" style="color:#7AA8E8;" aria-hidden="true"></i>
+          <div class="ns-finding-text">Influencer campaign "Summer Haze" ROI tracking not yet linked to SKUs</div>
+          <span class="ns-finding-sev info">Info</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- ═══════════════ E-COMMERCE PAGE ═══════════════ -->
+    <main id="page-ecommerce" class="ns-content">
+      <div class="ns-page-title">E-Commerce</div>
+      <div class="ns-page-sub">Shopify sync · Last updated 2 min ago</div>
+
+      <div class="ns-metrics">
+        <div class="ns-metric green"><div class="ns-metric-label">MTD Revenue</div><div class="ns-metric-value">$68.4k</div><div class="ns-metric-delta"><i class="ti ti-trending-up" aria-hidden="true"></i> +22% vs last month</div></div>
+        <div class="ns-metric"><div class="ns-metric-label">Active SKUs</div><div class="ns-metric-value">47</div><div class="ns-metric-delta"><i class="ti ti-package" aria-hidden="true"></i> 3 low inventory</div></div>
+        <div class="ns-metric warn"><div class="ns-metric-label">Pending Fulfillment</div><div class="ns-metric-value">34</div><div class="ns-metric-delta down"><i class="ti ti-clock" aria-hidden="true"></i> 6 flagged</div></div>
+        <div class="ns-metric"><div class="ns-metric-label">Avg Order Value</div><div class="ns-metric-value">$87</div><div class="ns-metric-delta"><i class="ti ti-trending-up" aria-hidden="true"></i> +$12 vs last week</div></div>
+      </div>
+
+      <div class="ns-card" style="margin-bottom:16px;">
+        <div class="ns-card-title">Recent Orders</div>
+        <table class="ns-table">
+          <thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>COA</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--gold)">#NS-4421</td><td>Marcus T.</td><td>Indica 3.5g × 2</td><td>$60</td><td><span class="ns-pill green">Fulfilled</span></td><td><span class="ns-pill green">Valid</span></td></tr>
+            <tr><td style="color:var(--gold)">#NS-4420</td><td>Danielle R.</td><td>Pre-Roll 5pk</td><td>$25</td><td><span class="ns-pill blue">In Transit</span></td><td><span class="ns-pill green">Valid</span></td></tr>
+            <tr><td style="color:var(--gold)">#NS-4419</td><td>Jerome K.</td><td>D8 Gummies × 3</td><td>$90</td><td><span class="ns-pill gold">Processing</span></td><td><span class="ns-pill green">Valid</span></td></tr>
+            <tr><td style="color:var(--gold)">#NS-4418</td><td>Aisha M.</td><td>Concentrate 1g</td><td>$35</td><td><span class="ns-pill warn">Age Verify</span></td><td><span class="ns-pill green">Valid</span></td></tr>
+            <tr><td style="color:var(--gold)">#NS-4417</td><td>Devon S.</td><td>Sativa 7g</td><td>$40</td><td><span class="ns-pill green">Fulfilled</span></td><td><span class="ns-pill warn">Expiring</span></td></tr>
+            <tr><td style="color:var(--gold)">#NS-4416</td><td>Kira W.</td><td>Indica 7g × 2</td><td>$80</td><td><span class="ns-pill blue">In Transit</span></td><td><span class="ns-pill green">Valid</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ns-grid-2">
+        <div class="ns-card">
+          <div class="ns-card-title">Low Inventory Alerts</div>
+          <table class="ns-table">
+            <thead><tr><th>SKU</th><th>Stock</th><th>Reorder At</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Indica Flower 3.5g</td><td style="color:#E09550;">12</td><td>20</td><td><span class="ns-pill warn">Reorder</span></td></tr>
+              <tr><td>CBG Pre-Roll</td><td style="color:#C46B6B;">4</td><td>15</td><td><span class="ns-pill red">Critical</span></td></tr>
+              <tr><td>CBD Tincture 1000mg</td><td style="color:#E09550;">8</td><td>10</td><td><span class="ns-pill warn">Reorder</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ns-card">
+          <div class="ns-card-title">Payment Processor Health</div>
+          <div class="ns-call-metric"><span class="ns-call-label">Primary processor</span><span class="ns-pill green">Online</span></div>
+          <div class="ns-call-metric"><span class="ns-call-label">Backup processor</span><span class="ns-pill green">Standby</span></div>
+          <div class="ns-call-metric"><span class="ns-call-label">Today's transactions</span><span class="ns-call-value">49</span></div>
+          <div class="ns-call-metric"><span class="ns-call-label">Chargebacks (30d)</span><span class="ns-call-value" style="color:#8FC99A;">0</span></div>
+          <div class="ns-call-metric"><span class="ns-call-label">Settlement pending</span><span class="ns-call-value" style="color:var(--gold);">$3,240</span></div>
+        </div>
+      </div>
+
+      <div class="ns-audit" style="margin-top:24px;">
+        <div class="ns-audit-header">
+          <div class="ns-audit-title"><i class="ti ti-shield" aria-hidden="true"></i> E-Commerce Audit</div>
+          <span class="ns-pill gold">Auto-run daily at midnight</span>
+        </div>
+        <div class="ns-audit-grid">
+          <div class="ns-audit-item"><div class="ns-audit-item-label">COA Coverage</div><div class="ns-audit-item-val pass">44/47</div></div>
+          <div class="ns-audit-item"><div class="ns-audit-item-label">Shopify Sync</div><div class="ns-audit-item-val pass">Healthy</div></div>
+          <div class="ns-audit-item"><div class="ns-audit-item-label">Age Gate Active</div><div class="ns-audit-item-val pass">Yes</div></div>
+        </div>
+        <div class="ns-finding"><i class="ti ti-alert-triangle ns-finding-icon" style="color:#E09550;" aria-hidden="true"></i><div class="ns-finding-text">3 SKUs below reorder threshold — supplier POs not generated yet</div><span class="ns-finding-sev warn">Warning</span></div>
+        <div class="ns-finding"><i class="ti ti-alert-triangle ns-finding-icon" style="color:#E09550;" aria-hidden="true"></i><div class="ns-finding-text">COA missing for 3 draft SKUs — cannot be published until uploaded</div><span class="ns-finding-sev warn">Warning</span></div>
+        <div class="ns-finding"><i class="ti ti-check ns-finding-icon" style="color:#8FC99A;" aria-hidden="true"></i><div class="ns-finding-text">All published products have valid, unexpired COAs</div><span class="ns-finding-sev pass">Clear</span></div>
+      </div>
+    </main>
+
+    <!-- ═══════════════ WORKFORCE PAGE ═══════════════ -->
+    <main id="page-workforce" class="ns-content">
+      <div class="ns-page-title">Workforce Management</div>
+      <div class="ns-page-sub">Temp staff · Agentic AI workers · Scheduling</div>
+
+      <div class="ns-metrics">
+        <div class="ns-metric green"><div class="ns-metric-label">Active Agents</div><div class="ns-metric-value">6</div><div class="ns-metric-delta"><i class="ti ti-robot" aria-hidden="true"></i> 2 idle, 0 errors</div></div>
+        <div class="ns-metric"><div class="ns-metric-label">Temp Staff Today</div><div class="ns-metric-value">3</div><div class="ns-metric-delta"><i class="ti ti-user-check" aria-hidden="true"></i> 2 packing · 1 QC</div></div>
+        <div class="ns-metric warn"><div class="ns-metric-label">Pending Shifts</div><div class="ns-metric-value">5</div><div class="ns-metric-delta down"><i class="ti ti-clock" aria-hidden="true"></i> This week unfilled</div></div>
+        <div class="ns-metric"><div class="ns-metric-label">Agent Task Rate</div><div class="ns-metric-value">94%</div><div class="ns-metric-delta"><i class="ti ti-trending-up" aria-hidden="true"></i> +3% vs last week</div></div>
+      </div>
+
+      <div class="ns-grid-2">
+        <div class="ns-card">
+          <div class="ns-card-title">AI Agent Status</div>
+          <div class="ns-agent-row"><div class="ns-agent-dot active"></div><div class="ns-agent-name">Shopify Agent</div><div class="ns-agent-task">Processing orders, updating inventory</div><div class="ns-agent-time">4h 12m</div></div>
+          <div class="ns-agent-row"><div class="ns-agent-dot active"></div><div class="ns-agent-name">SEO Agent</div><div class="ns-agent-task">Rewriting 12 product titles + meta</div><div class="ns-agent-time">1h 44m</div></div>
+          <div class="ns-agent-row"><div class="ns-agent-dot active"></div><div class="ns-agent-name">Email Agent</div><div class="ns-agent-task">Post-purchase sequences, 5 queued</div><div class="ns-agent-time">0h 32m</div></div>
+          <div class="ns-agent-row"><div class="ns-agent-dot active"></div><div class="ns-agent-name">COA Validator</div><div class="ns-agent-task">Apex Hemp cert re-upload verification</div><div class="ns-agent-time">0h 08m</div></div>
+          <div class="ns-agent-row"><div class="ns-agent-dot active"></div><div class="ns-agent-name">Review Responder</div><div class="ns-agent-task">2 new reviews — drafting replies</div><div class="ns-agent-time">0h 14m</div></div>
+          <div class="ns-agent-row"><div class="ns-agent-dot idle"></div><div class="ns-agent-name">Pricing Agent</div><div class="ns-agent-task">Idle — last scan 18h ago</div><div class="ns-agent-time">Idle</div></div>
+          <div class="ns-agent-row"><div class="ns-agent-dot idle"></div><div class="ns-agent-name">Ad Copy Agent</div><div class="ns-agent-task">No campaigns active</div><div class="ns-agent-time">Idle</div></div>
+          <div class="ns-agent-row"><div class="ns-agent-dot offline"></div><div class="ns-agent-name">Inventory Buyer</div><div class="ns-agent-task">Pending approval to activate</div><div class="ns-agent-time">Off</div></div>
+        </div>
+
+        <div class="ns-card">
+          <div class="ns-card-title">Temp Staff — This Week</div>
+          <table class="ns-table">
+            <thead><tr><th>Name</th><th>Role</th><th>Hours</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Carlos M.</td><td>Fulfillment</td><td>16/40</td><td><span class="ns-pill green">Active</span></td></tr>
+              <tr><td>Niesha B.</td><td>Fulfillment</td><td>12/32</td><td><span class="ns-pill green">Active</span></td></tr>
+              <tr><td>Terrell J.</td><td>QC / Packaging</td><td>8/24</td><td><span class="ns-pill green">Active</span></td></tr>
+              <tr><td>Open Shift</td><td>Fulfillment</td><td>—</td><td><span class="ns-pill warn">Unfilled</span></td></tr>
+              <tr><td>Open Shift</td><td>Delivery Driver</td><td>—</td><td><span class="ns-pill warn">Unfilled</span></td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:14px;padding-top:12px;border-top:0.5px solid var(--border);">
+            <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(201,169,110,0.5);margin-bottom:8px;">Temp Agency Status</div>
+            <div class="ns-call-metric"><span class="ns-call-label">Agency Partner</span><span style="font-size:12px;color:#E8E0D4;">TempForce NC</span></div>
+            <div class="ns-call-metric"><span class="ns-call-label">Open requests</span><span class="ns-call-value" style="color:#E09550;">2</span></div>
+            <div class="ns-call-metric"><span class="ns-call-label">Avg fill time</span><span class="ns-call-value">6.2h</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ns-audit">
+        <div class="ns-audit-header">
+          <div class="ns-audit-title"><i class="ti ti-shield" aria-hidden="true"></i> Workforce Audit</div>
+          <span class="ns-pill gold">Live</span>
+        </div>
+        <div class="ns-audit-grid">
+          <div class="ns-audit-item"><div class="ns-audit-item-label">Agent Uptime</div><div class="ns-audit-item-val pass">99.2%</div></div>
+          <div class="ns-audit-item"><div class="ns-audit-item-label">Unfilled Shifts</div><div class="ns-audit-item-val warn">2</div></div>
+          <div class="ns-audit-item"><div class="ns-audit-item-label">Tasks Completed</div><div class="ns-audit-item-val pass">247</div></div>
+        </div>
+        <div class="ns-finding"><i class="ti ti-alert-triangle ns-finding-icon" style="color:#E09550;" aria-hidden="true"></i><div class="ns-finding-text">2 unfilled temp shifts this week — fulfillment capacity may fall short on high-volume days</div><span class="ns-finding-sev warn">Warning</span></div>
+        <div class="ns-finding"><i class="ti ti-info-circle ns-finding-icon" style="color:#7AA8E8;" aria-hidden="true"></i><div class="ns-finding-text">Pricing Agent has not run in 18 hours — manual trigger or schedule adjustment recommended</div><span class="ns-finding-sev info">Info</span></div>
+        <div class="ns-finding"><i class="ti ti-check ns-finding-icon" style="color:#8FC99A;" aria-hidden="true"></i><div class="ns-finding-text">All critical agents (Shopify, Email, COA) online and processing normally</div><span class="ns-finding-sev pass">Clear</span></div>
+      </div>
+    </main>
+
+    <!-- ═══════════════ CALL CENTER PAGE ═══════════════ -->
+    <main id="page-callcenter" class="ns-content">
+      <div class="ns-page-title">Affiliate Call Center</div>
+      <div class="ns-page-sub">Inbound · Outbound · Lead attribution</div>
+
+      <div class="ns-metrics">
+        <div class="ns-metric green"><div class="ns-metric-label">Total Calls Today</div><div class="ns-metric-value">23</div><div class="ns-metric-delta"><i class="ti ti-trending-up" aria-hidden="true"></i> +6 vs yesterday</div></div>
+        <div class="ns-metric"><div class="ns-metric-label">Conversion Rate</div><div class="ns-metric-value">34%</div><div class="ns-metric-delta"><i class="ti ti-target" aria-hidden="true"></i> 8 closed today</div></div>
+        <div class="ns-metric warn"><div class="ns-metric-label">Uncontacted Leads</div><div class="ns-metric-value">3</div><div class="ns-metric-delta down"><i class="ti ti-clock" aria-hidden="true"></i> >2h waiting</div></div>
+        <div class="ns-metric"><div class="ns-metric-label">Revenue Attributed</div><div class="ns-metric-value">$820</div><div class="ns-metric-delta"><i class="ti ti-coin" aria-hidden="true"></i> $87 avg order</div></div>
+      </div>
+
+      <div class="ns-grid-2">
+        <div class="ns-card">
+          <div class="ns-card-title">Active Call Agents</div>
+          <table class="ns-table">
+            <thead><tr><th>Agent</th><th>Calls</th><th>Conv.</th><th>Revenue</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Keisha R.</td><td>9</td><td style="color:#8FC99A;">44%</td><td style="color:var(--gold)">$340</td><td><span class="ns-pill green">On Call</span></td></tr>
+              <tr><td>Darius L.</td><td>7</td><td style="color:#8FC99A;">29%</td><td style="color:var(--gold)">$245</td><td><span class="ns-pill green">Available</span></td></tr>
+              <tr><td>Monique S.</td><td>5</td><td style="color:#E09550;">20%</td><td style="color:var(--gold)">$175</td><td><span class="ns-pill gold">Wrap-up</span></td></tr>
+              <tr><td>Tyrone H.</td><td>2</td><td>50%</td><td style="color:var(--gold)">$60</td><td><span class="ns-pill blue">Break</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ns-card">
+          <div class="ns-card-title">Lead Queue</div>
+          <table class="ns-table">
+            <thead><tr><th>Lead</th><th>Source</th><th>Wait</th><th>Priority</th></tr></thead>
+            <tbody>
+              <tr><td>Incoming #887</td><td>Website</td><td style="color:#C46B6B;">2h 14m</td><td><span class="ns-pill red">Hot</span></td></tr>
+              <tr><td>Incoming #886</td><td>Instagram</td><td style="color:#E09550;">1h 42m</td><td><span class="ns-pill warn">Medium</span></td></tr>
+              <tr><td>Incoming #885</td><td>Affiliate</td><td style="color:#E09550;">2h 51m</td><td><span class="ns-pill red">Hot</span></td></tr>
+              <tr><td>Incoming #884</td><td>Referral</td><td style="color:#8FC99A;">18m</td><td><span class="ns-pill green">Warm</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="ns-card" style="margin-bottom:16px;">
+        <div class="ns-card-title">Affiliate Attribution</div>
+        <table class="ns-table">
+          <thead><tr><th>Affiliate Code</th><th>Calls Driven</th><th>Conversions</th><th>Revenue</th><th>Commission</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--gold)">SMOKE20</td><td>8</td><td>4</td><td>$380</td><td style="color:#8FC99A;">$38</td></tr>
+            <tr><td style="color:var(--gold)">NORTH15</td><td>6</td><td>2</td><td>$210</td><td style="color:#8FC99A;">$21</td></tr>
+            <tr><td style="color:var(--gold)">SATIVA10</td><td>5</td><td>2</td><td>$180</td><td style="color:#8FC99A;">$18</td></tr>
+            <tr><td style="color:var(--gold)">HAZE25</td><td>4</td><td>0</td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ns-audit">
+        <div class="ns-audit-header">
+          <div class="ns-audit-title"><i class="ti ti-shield" aria-hidden="true"></i> Call Center Audit</div>
+          <span class="ns-pill gold">Live</span>
+        </div>
+        <div class="ns-audit-grid">
+          <div class="ns-audit-item"><div class="ns-audit-item-label">Avg Handle Time</div><div class="ns-audit-item-val">4m 12s</div></div>
+          <div class="ns-audit-item"><div class="ns-audit-item-label">SLA Breaches Today</div><div class="ns-audit-item-val warn">2</div></div>
+          <div class="ns-audit-item"><div class="ns-audit-item-label">Recorded Calls</div><div class="ns-audit-item-val pass">23/23</div></div>
+        </div>
+        <div class="ns-finding"><i class="ti ti-alert-triangle ns-finding-icon" style="color:#E09550;" aria-hidden="true"></i><div class="ns-finding-text">3 leads uncontacted for over 2 hours — assign immediately or route to outbound queue</div><span class="ns-finding-sev warn">Warning</span></div>
+        <div class="ns-finding"><i class="ti ti-check ns-finding-icon" style="color:#8FC99A;" aria-hidden="true"></i><div class="ns-finding-text">All calls recorded and stored — 30-day retention policy active</div><span class="ns-finding-sev pass">Clear</span></div>
+      </div>
+    </main>
+
+    <!-- ═══════════════ INFLUENCER PAGE ═══════════════ -->
+    <main id="page-influencer" class="ns-content">
+      <div class="ns-page-title">Influencer Hub</div>
+      <div class="ns-page-sub">Campaign management · Creator analytics · ROI tracking</div>
+
+      <div class="ns-metrics">
+        <div class="ns-metric green"><div class="ns-metric-label">Active Campaigns</div><div class="ns-metric-value">4</div><div class="ns-metric-delta"><i class="ti ti-speakerphone" aria-hidden="true"></i> 2 launching soon</div></div>
+        <div class="ns-metric"><div class="ns-metric-label">Total Creators</div><div class="ns-metric-value">18</div><div class="ns-metric-delta"><i class="ti ti-user-plus" aria-hidden="true"></i> 3 pending approval</div></div>
+        <div class="ns-metric"><div class="ns-metric-label">Total Reach</div><div class="ns-metric-value">840k</div><div class="ns-metric-delta"><i class="ti ti-eye" aria-hidden="true"></i> Across all creators</div></div>
+        <div class="ns-metric warn"><div class="ns-metric-label">Attributed Revenue</div><div class="ns-metric-value">$6.2k</div><div class="ns-metric-delta down"><i class="ti ti-link" aria-hidden="true"></i> 2 campaigns unlinked</div></div>
+      </div>
+
+      <div class="ns-grid-2">
+        <div class="ns-card">
+          <div class="ns-card-title">Top Creators</div>
+          <div class="ns-inf-row">
+            <div class="ns-inf-avatar" style="background:rgba(61,107,74,0.2);color:#8FC99A;">KJ</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:12px;color:#E8E0D4;">@kushj_nc</div>
+              <div style="font-size:10px;color:var(--muted);">220k followers · Micro-influencer</div>
+            </div>
+            <div style="text-align:right;"><div style="font-size:12px;color:var(--gold);">$2,140</div><div style="font-size:10px;color:var(--muted);">rev attr.</div></div>
+            <span class="ns-pill green" style="margin-left:8px;">Active</span>
+          </div>
+          <div class="ns-inf-row">
+            <div class="ns-inf-avatar" style="background:rgba(201,169,110,0.15);color:var(--gold);">TG</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:12px;color:#E8E0D4;">@thegreenpath</div>
+              <div style="font-size:10px;color:var(--muted);">88k followers · Lifestyle</div>
+            </div>
+            <div style="text-align:right;"><div style="font-size:12px;color:var(--gold);">$1,680</div><div style="font-size:10px;color:var(--muted);">rev attr.</div></div>
+            <span class="ns-pill green" style="margin-left:8px;">Active</span>
+          </div>
+          <div class="ns-inf-row">
+            <div class="ns-inf-avatar" style="background:rgba(55,100,180,0.15);color:#7AA8E8;">SC</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:12px;color:#E8E0D4;">@smokecultured</div>
+              <div style="font-size:10px;color:var(--muted);">64k followers · Wellness</div>
+            </div>
+            <div style="text-align:right;"><div style="font-size:12px;color:var(--gold);">$1,200</div><div style="font-size:10px;color:var(--muted);">rev attr.</div></div>
+            <span class="ns-pill blue" style="margin-left:8px;">Paused</span>
+          </div>
+          <div class="ns-inf-row">
+            <div class="ns-inf-avatar" style="background:rgba(196,107,107,0.15);color:#D48080;">NS</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:12px;color:#E8E0D4;">@northsidestoner</div>
+              <div style="font-size:10px;color:var(--muted);">41k followers · Humor</div>
+            </div>
+            <div style="text-align:right;"><div style="font-size:12px;color:var(--gold);">$640</div><div style="font-size:10px;color:var(--muted);">rev attr.</div></div>
+            <span class="ns-pill gold" style="margin-left:8px;">Pending</span>
+          </div>
+        </div>
+
+        <div class="ns-card">
+          <div class="ns-card-title">Active Campaigns</div>
+          <table class="ns-table">
+            <thead><tr><th>Campaign</th><th>Creators</th><th>Clicks</th><th>Conv.</th><th>ROI</th></tr></thead>
+            <tbody>
+              <tr><td style="color:var(--gold)">Summer Haze</td><td>4</td><td>1,204</td><td>67</td><td style="color:#8FC99A;">3.2×</td></tr>
+              <tr><td style="color:var(--gold)">Wake & Bake</td><td>3</td><td>840</td><td>42</td><td style="color:#8FC99A;">2.8×</td></tr>
+              <tr><td style="color:var(--gold)">Chill Vibes</td><td>2</td><td>512</td><td>—</td><td style="color:#E09550;">Unlinked</td></tr>
+              <tr><td style="color:var(--gold)">NC Locals</td><td>2</td><td>380</td><td>—</td><td style="color:#E09550;">Unlinked</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="ns-audit">
+        <div class="ns-audit-header">
+          <div class="ns-audit-title"><i class="ti ti-shield" aria-hidden="true"></i> Influencer Audit</div>
+          <span class="ns-pill gold">Last run: 1h ago</span>
+        </div>
+        <div class="ns-audit-grid">
+          <div class="ns-audit-item"><div class="ns-audit-item-label">Active Creators</div><div class="ns-audit-item-val pass">12</div></div>
+          <div class="ns-audit-item"><div class="ns-audit-item-label">Unlinked Campaigns</div><div class="ns-audit-item-val warn">2</div></div>
+          <div class="ns-audit-item"><div class="ns-audit-item-label">Contracts Signed</div><div class="ns-audit-item-val pass">15/18</div></div>
+        </div>
+        <div class="ns-finding"><i class="ti ti-alert-triangle ns-finding-icon" style="color:#E09550;" aria-hidden="true"></i><div class="ns-finding-text">"Chill Vibes" and "NC Locals" campaigns have no SKU attribution — revenue tracking not possible</div><span class="ns-finding-sev warn">Warning</span></div>
+        <div class="ns-finding"><i class="ti ti-alert-triangle ns-finding-icon" style="color:#E09550;" aria-hidden="true"></i><div class="ns-finding-text">3 creators have not signed brand compliance contracts — required before content goes live</div><span class="ns-finding-sev warn">Warning</span></div>
+        <div class="ns-finding"><i class="ti ti-check ns-finding-icon" style="color:#8FC99A;" aria-hidden="true"></i><div class="ns-finding-text">All promo codes active and tracked in Shopify discount system</div><span class="ns-finding-sev pass">Clear</span></div>
+      </div>
+    </main>
+
+    <!-- ═══════════════ COMPLIANCE PAGE ═══════════════ -->
+    <main id="page-compliance" class="ns-content">
+      <div class="ns-page-title">Compliance & COA Tracker</div>
+      <div class="ns-page-sub">Certificates of Analysis · Regulatory monitoring · Document vault</div>
+
+      <div class="ns-metrics">
+        <div class="ns-metric green"><div class="ns-metric-label">Valid COAs</div><div class="ns-metric-value">44</div><div class="ns-metric-delta"><i class="ti ti-check" aria-hidden="true"></i> Covers 44 SKUs</div></div>
+        <div class="ns-metric warn"><div class="ns-metric-label">Expiring Soon</div><div class="ns-metric-value">2</div><div class="ns-metric-delta down"><i class="ti ti-clock" aria-hidden="true"></i> Within 14 days</div></div>
+        <div class="ns-metric red"><div class="ns-metric-label">Missing COAs</div><div class="ns-metric-value">3</div><div class="ns-metric-delta down"><i class="ti ti-alert-triangle" aria-hidden="true"></i> Draft SKUs blocked</div></div>
+        <div class="ns-metric"><div class="ns-metric-label">Reg Alerts</div><div class="ns-metric-value">1</div><div class="ns-metric-delta"><i class="ti ti-news" aria-hidden="true"></i> NC THCA update</div></div>
+      </div>
+
+      <div class="ns-grid-2">
+        <div class="ns-card">
+          <div class="ns-card-title">COA Status by Supplier</div>
+          <table class="ns-table">
+            <thead><tr><th>Supplier</th><th>SKUs</th><th>Valid</th><th>Expiring</th><th>Missing</th></tr></thead>
+            <tbody>
+              <tr><td>Apex Hemp Co.</td><td>18</td><td style="color:#8FC99A;">16</td><td style="color:#E09550;">2</td><td>0</td></tr>
+              <tr><td>Carolina Cultivars</td><td>14</td><td style="color:#8FC99A;">14</td><td>0</td><td>0</td></tr>
+              <tr><td>Green Ridge Farm</td><td>10</td><td style="color:#8FC99A;">10</td><td>0</td><td>0</td></tr>
+              <tr><td>Draft / Unassigned</td><td>5</td><td>2</td><td>0</td><td style="color:#C46B6B;">3</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ns-card">
+          <div class="ns-card-title">Regulatory Timeline</div>
+          <div class="ns-timeline">
+            <div class="ns-tl-item">
+              <div class="ns-tl-dot-col"><div class="ns-tl-dot" style="background:#C46B6B;"></div><div class="ns-tl-line"></div></div>
+              <div><div class="ns-tl-date">Pending Action</div><div class="ns-tl-text">NC THCA regulatory update — review required before next restock</div></div>
+            </div>
+            <div class="ns-tl-item">
+              <div class="ns-tl-dot-col"><div class="ns-tl-dot" style="background:#E09550;"></div><div class="ns-tl-line"></div></div>
+              <div><div class="ns-tl-date">Jun 2, 2026</div><div class="ns-tl-text">Apex Hemp COA expiry — 2 SKUs must be resubmitted for testing</div></div>
+            </div>
+            <div class="ns-tl-item">
+              <div class="ns-tl-dot-col"><div class="ns-tl-dot" style="background:#8FC99A;"></div><div class="ns-tl-line"></div></div>
+              <div><div class="ns-tl-date">May 1, 2026</div><div class="ns-tl-text">Annual business license renewal filed — approved</div></div>
+            </div>
+            <div class="ns-tl-item">
+              <div class="ns-tl-dot-col"><div class="ns-tl-dot" style="background:#8FC99A;"></div></div>
+              <div><div class="ns-tl-date">Mar 15, 2026</div><div class="ns-tl-text">Age verification gate audit passed — third-party verified</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ns-audit">
+        <div class="ns-audit-header">
+          <div class="ns-audit-title"><i class="ti ti-shield" aria-hidden="true"></i> Compliance Audit</div>
+          <span class="ns-pill gold">Runs every 6 hours</span>
+        </div>
+        <div class="ns-audit-grid">
+          <div class="ns-audit-item"><div class="ns-audit-item-label">COA Coverage</div><div class="ns-audit-item-val pass">93.6%</div></div>
+          <div class="ns-audit-item"><div class="ns-audit-item-label">Reg Flags</div><div class="ns-audit-item-val warn">1</div></div>
+          <div class="ns-audit-item"><div class="ns-audit-item-label">Doc Vault</div><div class="ns-audit-item-val pass">Current</div></div>
+        </div>
+        <div class="ns-finding"><i class="ti ti-x ns-finding-icon" style="color:#C46B6B;" aria-hidden="true"></i><div class="ns-finding-text">NC THCA regulatory update requires manual review — potential impact on current inventory listings</div><span class="ns-finding-sev warn">Action Req.</span></div>
+        <div class="ns-finding"><i class="ti ti-alert-triangle ns-finding-icon" style="color:#E09550;" aria-hidden="true"></i><div class="ns-finding-text">2 Apex Hemp COAs expiring Jun 2 — contact supplier to begin retesting process now</div><span class="ns-finding-sev warn">Warning</span></div>
+        <div class="ns-finding"><i class="ti ti-alert-triangle ns-finding-icon" style="color:#E09550;" aria-hidden="true"></i><div class="ns-finding-text">3 draft SKUs have no assigned COA — auto-blocked from publishing by Shopify agent</div><span class="ns-finding-sev warn">Warning</span></div>
+        <div class="ns-finding"><i class="ti ti-check ns-finding-icon" style="color:#8FC99A;" aria-hidden="true"></i><div class="ns-finding-text">All published products pass THC delta-9 ≤0.3% threshold per current COAs</div><span class="ns-finding-sev pass">Clear</span></div>
+        <div class="ns-finding"><i class="ti ti-check ns-finding-icon" style="color:#8FC99A;" aria-hidden="true"></i><div class="ns-finding-text">Age gate active on all checkout flows — compliant with THCA retail best practices</div><span class="ns-finding-sev pass">Clear</span></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.ns-content').forEach(el => el.classList.remove('visible'));
+  document.querySelectorAll('.ns-nav-btn').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.ns-sidebar-item').forEach(el => el.classList.remove('active'));
+
+  const page = document.getElementById('page-' + id);
+  if (page) page.classList.add('visible');
+
+  const navMap = {
+    'overview': 0, 'ecommerce': 1, 'workforce': 2,
+    'callcenter': 3, 'influencer': 4, 'compliance': 5
+  };
+  const navBtns = document.querySelectorAll('.ns-nav-btn');
+  if (navMap[id] !== undefined && navBtns[navMap[id]]) {
+    navBtns[navMap[id]].classList.add('active');
+  }
+
+  const sidebarMap = {
+    'overview': 0, 'ecommerce': 1, 'workforce': 2,
+    'callcenter': 3, 'influencer': 4, 'compliance': 5
+  };
+  const sideItems = document.querySelectorAll('.ns-sidebar-item');
+  if (sidebarMap[id] !== undefined && sideItems[sidebarMap[id]]) {
+    sideItems[sidebarMap[id]].classList.add('active');
+  }
+}
+</script>
